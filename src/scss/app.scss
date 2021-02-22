@@ -1,0 +1,11 @@
+body {
+  min-height: 100vh;
+  background-color: white;
+}
+.app,
+.app > .row {
+  min-height: inherit;
+}
+img {
+  border-radius: 50%;
+}
