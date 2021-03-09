@@ -18,10 +18,17 @@ module.exports = {
   },
 
   entry: {
+    // Main app entry
     app: path.join(srcDir, "app.js"),
-    index: path.join(viewsDir, "Index/index.js"),
-    // Add other script entries like the one below:
-    // about: path.join(viewsDir, 'path/to/about.js'),
+
+    // Add shared components below. Only for dependencies.
+	//
+
+    // Page entries. Add other page entries below.
+    index: {
+      import: path.join(viewsDir, "Index/index.js"),
+      // dependOn: ["sharedEntry"],
+    },
   },
 
   module: {
@@ -35,15 +42,16 @@ module.exports = {
 
     new HtmlWebpackPlugin(
       template("Index/index.html", {
-        includeEntries: "index",
+        includeEntries: ["index"]
       })
     ),
-    // Add other HtmlWebpackPlugin view instances like the one below:
-    // new HtmlWebpackPlugin(
-    //   template("path/to/about.html", {
-    //     includeEntries: ["about.js"],
-    //     title: "About"
-    //   })
-    // ),
+    // Add other HtmlWebpackPlugin view instances below
   ],
+
+  optimization: {
+    runtimeChunk: "single",
+    splitChunks: {
+      chunks: "all",
+    },
+  },
 };
